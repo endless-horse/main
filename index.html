@@ -5,11 +5,10 @@
   fetch("https://schooldiary.asvirtual.repl.co/api/data")
     .then(res => res.json()
       .then(jsonRes => {
-        type = window.location.href.replaceAll("/", "")
-        console.log(type)
+        type = window.location.href.split("?")[1]
         const response = JSON.stringify(jsonRes[type])
         if (response == undefined) {
-          //window.location.href = "/?users"
+          window.location.href = "/?users"
         }
         console.log(response)
         document.getElementById("data").innerHTML = response
