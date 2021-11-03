@@ -1,1 +1,17 @@
-some
+<a href="/users">users</a>
+<a href="/schools">other</a>
+<p id="data">loading...<p>
+<script>
+  fetch("https://schooldiary.asvirtual.repl.co/api/data")
+    .then(res => res.json()
+      .then(jsonRes => {
+        type = window.location.pathname.replaceAll("/", "")
+        const response = JSON.stringify(jsonRes[type])
+        if (response == undefined) {
+          window.location.href = "users"
+        }
+        console.log(response)
+        document.getElementById("data").innerHTML = response
+      })
+    )
+</script>
