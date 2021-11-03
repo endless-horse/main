@@ -5,7 +5,7 @@
   fetch("https://schooldiary.asvirtual.repl.co/api/data")
     .then(res => res.json()
       .then(jsonRes => {
-        type = window.location.pahtname.replaceAll("/", "")
+        type = window.location.pathname.replaceAll("/", "")
         console.log(type)
         const response = JSON.stringify(jsonRes[type])
         if (response == undefined) {
