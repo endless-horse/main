@@ -7,10 +7,13 @@
     <title>School Diary Leak (?)</title>
   </head>
   <body>
-    <h1>School Diary Leak (?)</h1>
-    <a href="/?users">users</a>
-    <a href="/?schools">other</a>
-    <p id="data">loading...<p>
+    <div class="container-fluid p-5">
+      <h1>School Diary Leak (?)</h1>
+      <a href="/?users">users</a>
+      <a href="/?schools">other</a>
+      <p id="data">loading...<p>
+    </div>
+    
     <script>
       fetch("https://schooldiary.asvirtual.repl.co/api/data")
         .then(res => res.json()
