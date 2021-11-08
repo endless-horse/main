@@ -6,40 +6,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <title>School Diary Leak (?)</title>
+  <title>School Diary Data</title>
   <style>
     * {
       font-size: small;
     }
+    .wow {
+      animation: pulsate 0.8s infinite;
+      color: red;
+      font-weight: 600;
+      text-decoration: underline;
+      text-transform: lowercase;
+      font-family: monospace;
+    }
+    @keyframes pulsate {
+    0% { 
+      text-transform: lowercase;
+    }
+    50% { 
+      text-transform: uppercase;
+    }
+    100% { 
+      text-transform: lowercase;
+    }
+}
   </style>
 </head>
 
 <body>
   <div class="p-2">
-    <h1>School Diary Data</h1>
-    <div>Le password crackate sono in vendita!
+    <div class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search (case sensitive)" aria-label="Search" id="word">
+      <button class="btn btn-outline-success" onclick="search()">Search</button>
+    </div>
+    <h1 class="py-3">School Diary Data</h1>
+    <div class="wow" style="font-size: large;">Le password crackate sono in vendita!
       <a href="https://shorturl.at/uHZ89">[Compra qui]</a>
     </div>
-    <hr>
+    <div style="font-size: 8px;">
+      Questo sito semplicemente mostra il database """pubblico""" di un sito.
+      Le passwords sono salate con chiave segreta e hashate, magari qualcuno che ha tempo e voglia potrebbe provare (inutilmente) a crackarle. 
+    </div>
     <div>
       <a href="https://school-diary-app.netlify.app/">School Diary Site</a> -
       <a href="https://replit.com/@Asvirtual/SchoolDiary?v=1">Site Public Backend</a> -
       <a href="https://schooldiary.asvirtual.repl.co/">API Endpoint</a>
     </div>
-    <div style="font-size: 8px;">
-      Questo sito semplicemente mostra il database *pubblico* di un sito.
-      Le passwords sono salate con chiave segreta e hashate, magari qualcuno che ha tempo e voglia potrebbe provare (inutilmente) a crackarle. 
-    </div>
-    <a href="/?users">Users</a> -
-    <a href="/?schools">Schools</a>
+    <hr>
+    <a class="btn btn-primary"  href="/?users" role="button">Users</a>
+    <a class="btn btn-primary"  href="/?schools" role="button">Schools</a>
     <div class="table-responsive">
       <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Email</th>
-            <th scope="col">Username</th>
-            <th scope="col">Encrypted Password</th>
-          </tr>
+        <thead id="head">
         </thead>
         <tbody id="data">
         </tbody>
@@ -56,20 +74,67 @@
           if (response == undefined) {
             window.location.href = "/?users"
           }
-          console.log(jsonRes[type][0]["email"])
           final = ""
+          data = jsonRes[type]
           if (type == "users") {
-            for (i in jsonRes[type]) {
+            document.getElementById("head").innerHTML = `<tr>
+                <th scope="col">Email</th>
+                <th scope="col">Username</th>
+                <th scope="col">Encrypted Password</th>
+              </tr>`
+            for (i in data) {
               final += `<tr>
-                  <td>${jsonRes[type][i]["email"]}</td>
-                  <td>${jsonRes[type][i]["username"]}</td>
-                  <td>${jsonRes[type][i]["encryptedPassword"]}</td>
+                  <td>${data[i]["email"]}</td>
+                  <td>${data[i]["username"]}</td>
+                  <td>${data[i]["encryptedPassword"]}</td>
+                </tr>`
+            }
+          }
+          if (type == "schools") {
+            document.getElementById("head").innerHTML = `<tr>
+                <th scope="col">Sezione</th>
+                <th scope="col">Homeworks</th>
+                <th scope="col">Tests</th>
+                <th scope="col">Interrogations</th>
+              </tr>`
+            oberdan = data["0"]["classes"]
+            for (i in oberdan) {
+              homeworks = ""
+              for (j in oberdan[i]["homeworks"]) {
+                homeworks += `${oberdan[i]["homeworks"][j]["subject"]} ${oberdan[i]["homeworks"][j]["date"].split("T")[0]}: ${oberdan[i]["homeworks"][j]["title"]}<br><br>`
+              }
+              tests = ""
+              for (k in oberdan[i]["tests"]) {
+                tests += `${oberdan[i]["tests"][k]["subject"]} ${oberdan[i]["tests"][k]["date"].split("T")[0]}: ${oberdan[i]["tests"][k]["title"]}<br><br>`
+              }
+              interrogations = ""
+              for (l in oberdan[i]["interrogations"]) {
+                interrogations += `${oberdan[i]["interrogations"][l]["subject"]} ${oberdan[i]["interrogations"][l]["startDate"].split("T")[0]}/${oberdan[i]["interrogations"][l]["startDate"].split("T")[0]}: ${oberdan[i]["interrogations"][l]["title"]}<br><br>`
+              }
+              final += `<tr>
+                  <td>${oberdan[i]["name"]}</td>
+                  <td>${homeworks}</td>
+                  <td>${tests}</td>
+                  <td>${interrogations}</td>
                 </tr>`
             }
           }
           document.getElementById("data").innerHTML = final
         })
       )
+
+      function search() {
+        word = document.getElementById("word").value
+        tds = document.getElementsByTagName("td")
+        for (el in tds) {
+          console.log(tds[el])
+          if (tds[el].innerHTML.includes(word)) {
+            tds[el].style.backgroundColor = "yellow"
+          } else {
+            tds[el].style.backgroundColor = "white"
+          }
+        }
+      }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
