@@ -66,75 +66,7 @@
   </div>
 
   <script>
-    fetch("https://schooldiary.asvirtual.repl.co/api/data")
-      .then(res => res.json()
-        .then(jsonRes => {
-          type = window.location.href.split("?")[1]
-          const response = JSON.stringify(jsonRes[type])
-          if (response == undefined) {
-            window.location.href = "/?users"
-          }
-          final = ""
-          data = jsonRes[type]
-          if (type == "users") {
-            document.getElementById("head").innerHTML = `<tr>
-                <th scope="col">Email</th>
-                <th scope="col">Username</th>
-                <th scope="col">Encrypted Password</th>
-              </tr>`
-            for (i in data) {
-              final += `<tr>
-                  <td>${data[i]["email"]}</td>
-                  <td>${data[i]["username"]}</td>
-                  <td>${data[i]["encryptedPassword"]}</td>
-                </tr>`
-            }
-          }
-          if (type == "schools") {
-            document.getElementById("head").innerHTML = `<tr>
-                <th scope="col">Sezione</th>
-                <th scope="col">Homeworks</th>
-                <th scope="col">Tests</th>
-                <th scope="col">Interrogations</th>
-              </tr>`
-            oberdan = data["0"]["classes"]
-            for (i in oberdan) {
-              homeworks = ""
-              for (j in oberdan[i]["homeworks"]) {
-                homeworks += `${oberdan[i]["homeworks"][j]["subject"]} ${oberdan[i]["homeworks"][j]["date"].split("T")[0]}: ${oberdan[i]["homeworks"][j]["title"]}<br><br>`
-              }
-              tests = ""
-              for (k in oberdan[i]["tests"]) {
-                tests += `${oberdan[i]["tests"][k]["subject"]} ${oberdan[i]["tests"][k]["date"].split("T")[0]}: ${oberdan[i]["tests"][k]["title"]}<br><br>`
-              }
-              interrogations = ""
-              for (l in oberdan[i]["interrogations"]) {
-                interrogations += `${oberdan[i]["interrogations"][l]["subject"]} ${oberdan[i]["interrogations"][l]["startDate"].split("T")[0]}/${oberdan[i]["interrogations"][l]["startDate"].split("T")[0]}: ${oberdan[i]["interrogations"][l]["title"]}<br><br>`
-              }
-              final += `<tr>
-                  <td>${oberdan[i]["name"]}</td>
-                  <td>${homeworks}</td>
-                  <td>${tests}</td>
-                  <td>${interrogations}</td>
-                </tr>`
-            }
-          }
-          document.getElementById("data").innerHTML = final
-        })
-      )
-
-      function search() {
-        word = document.getElementById("word").value
-        tds = document.getElementsByTagName("td")
-        for (el in tds) {
-          console.log(tds[el])
-          if (tds[el].innerHTML.includes(word)) {
-            tds[el].style.backgroundColor = "yellow"
-          } else {
-            tds[el].style.backgroundColor = "white"
-          }
-        }
-      }
+    var _0x6775=["\x3F","\x73\x70\x6C\x69\x74","\x68\x72\x65\x66","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x73\x74\x72\x69\x6E\x67\x69\x66\x79","\x2F\x3F\x75\x73\x65\x72\x73","","\x75\x73\x65\x72\x73","\x69\x6E\x6E\x65\x72\x48\x54\x4D\x4C","\x68\x65\x61\x64","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x3C\x74\x72\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x3C\x74\x68\x20\x73\x63\x6F\x70\x65\x3D\x22\x63\x6F\x6C\x22\x3E\x45\x6D\x61\x69\x6C\x3C\x2F\x74\x68\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x3C\x74\x68\x20\x73\x63\x6F\x70\x65\x3D\x22\x63\x6F\x6C\x22\x3E\x55\x73\x65\x72\x6E\x61\x6D\x65\x3C\x2F\x74\x68\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x3C\x74\x68\x20\x73\x63\x6F\x70\x65\x3D\x22\x63\x6F\x6C\x22\x3E\x45\x6E\x63\x72\x79\x70\x74\x65\x64\x20\x50\x61\x73\x73\x77\x6F\x72\x64\x3C\x2F\x74\x68\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x3C\x2F\x74\x72\x3E","\x3C\x74\x72\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x3C\x74\x64\x3E","\x65\x6D\x61\x69\x6C","\x3C\x2F\x74\x64\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x3C\x74\x64\x3E","\x75\x73\x65\x72\x6E\x61\x6D\x65","\x65\x6E\x63\x72\x79\x70\x74\x65\x64\x50\x61\x73\x73\x77\x6F\x72\x64","\x3C\x2F\x74\x64\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x3C\x2F\x74\x72\x3E","\x73\x63\x68\x6F\x6F\x6C\x73","\x3C\x74\x72\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x3C\x74\x68\x20\x73\x63\x6F\x70\x65\x3D\x22\x63\x6F\x6C\x22\x3E\x53\x65\x7A\x69\x6F\x6E\x65\x3C\x2F\x74\x68\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x3C\x74\x68\x20\x73\x63\x6F\x70\x65\x3D\x22\x63\x6F\x6C\x22\x3E\x48\x6F\x6D\x65\x77\x6F\x72\x6B\x73\x3C\x2F\x74\x68\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x3C\x74\x68\x20\x73\x63\x6F\x70\x65\x3D\x22\x63\x6F\x6C\x22\x3E\x54\x65\x73\x74\x73\x3C\x2F\x74\x68\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x3C\x74\x68\x20\x73\x63\x6F\x70\x65\x3D\x22\x63\x6F\x6C\x22\x3E\x49\x6E\x74\x65\x72\x72\x6F\x67\x61\x74\x69\x6F\x6E\x73\x3C\x2F\x74\x68\x3E\x0D\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x3C\x2F\x74\x72\x3E","\x63\x6C\x61\x73\x73\x65\x73","\x30","\x68\x6F\x6D\x65\x77\x6F\x72\x6B\x73","\x73\x75\x62\x6A\x65\x63\x74","\x20","\x54","\x64\x61\x74\x65","\x3A\x20","\x74\x69\x74\x6C\x65","\x3C\x62\x72\x3E\x3C\x62\x72\x3E","\x74\x65\x73\x74\x73","\x69\x6E\x74\x65\x72\x72\x6F\x67\x61\x74\x69\x6F\x6E\x73","\x73\x74\x61\x72\x74\x44\x61\x74\x65","\x2F","\x6E\x61\x6D\x65","\x64\x61\x74\x61","\x74\x68\x65\x6E","\x6A\x73\x6F\x6E","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x73\x63\x68\x6F\x6F\x6C\x64\x69\x61\x72\x79\x2E\x61\x73\x76\x69\x72\x74\x75\x61\x6C\x2E\x72\x65\x70\x6C\x2E\x63\x6F\x2F\x61\x70\x69\x2F\x64\x61\x74\x61","\x76\x61\x6C\x75\x65","\x77\x6F\x72\x64","\x74\x64","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x73\x42\x79\x54\x61\x67\x4E\x61\x6D\x65","\x6C\x6F\x67","\x69\x6E\x63\x6C\x75\x64\x65\x73","\x62\x61\x63\x6B\x67\x72\x6F\x75\x6E\x64\x43\x6F\x6C\x6F\x72","\x73\x74\x79\x6C\x65","\x79\x65\x6C\x6C\x6F\x77","\x77\x68\x69\x74\x65"];fetch(_0x6775[38])[_0x6775[36]]((_0xdf83x1)=>{return _0xdf83x1[_0x6775[37]]()[_0x6775[36]]((_0xdf83x2)=>{type= window[_0x6775[3]][_0x6775[2]][_0x6775[1]](_0x6775[0])[1];const _0xdf83x3=JSON[_0x6775[4]](_0xdf83x2[type]);if(_0xdf83x3== undefined){window[_0x6775[3]][_0x6775[2]]= _0x6775[5]};final= _0x6775[6];data= _0xdf83x2[type];if(type== _0x6775[7]){document[_0x6775[10]](_0x6775[9])[_0x6775[8]]= `${_0x6775[11]}`;for(i in data){final+= `${_0x6775[12]}${data[i][_0x6775[13]]}${_0x6775[14]}${data[i][_0x6775[15]]}${_0x6775[14]}${data[i][_0x6775[16]]}${_0x6775[17]}`}};if(type== _0x6775[18]){document[_0x6775[10]](_0x6775[9])[_0x6775[8]]= `${_0x6775[19]}`;oberdan= data[_0x6775[21]][_0x6775[20]];for(i in oberdan){homeworks= _0x6775[6];for(j in oberdan[i][_0x6775[22]]){homeworks+= `${_0x6775[6]}${oberdan[i][_0x6775[22]][j][_0x6775[23]]}${_0x6775[24]}${oberdan[i][_0x6775[22]][j][_0x6775[26]][_0x6775[1]](_0x6775[25])[0]}${_0x6775[27]}${oberdan[i][_0x6775[22]][j][_0x6775[28]]}${_0x6775[29]}`};tests= _0x6775[6];for(k in oberdan[i][_0x6775[30]]){tests+= `${_0x6775[6]}${oberdan[i][_0x6775[30]][k][_0x6775[23]]}${_0x6775[24]}${oberdan[i][_0x6775[30]][k][_0x6775[26]][_0x6775[1]](_0x6775[25])[0]}${_0x6775[27]}${oberdan[i][_0x6775[30]][k][_0x6775[28]]}${_0x6775[29]}`};interrogations= _0x6775[6];for(l in oberdan[i][_0x6775[31]]){interrogations+= `${_0x6775[6]}${oberdan[i][_0x6775[31]][l][_0x6775[23]]}${_0x6775[24]}${oberdan[i][_0x6775[31]][l][_0x6775[32]][_0x6775[1]](_0x6775[25])[0]}${_0x6775[33]}${oberdan[i][_0x6775[31]][l][_0x6775[32]][_0x6775[1]](_0x6775[25])[0]}${_0x6775[27]}${oberdan[i][_0x6775[31]][l][_0x6775[28]]}${_0x6775[29]}`};final+= `${_0x6775[12]}${oberdan[i][_0x6775[34]]}${_0x6775[14]}${homeworks}${_0x6775[14]}${tests}${_0x6775[14]}${interrogations}${_0x6775[17]}`}};document[_0x6775[10]](_0x6775[35])[_0x6775[8]]= final})});function search(){word= document[_0x6775[10]](_0x6775[40])[_0x6775[39]];tds= document[_0x6775[42]](_0x6775[41]);for(el in tds){console[_0x6775[43]](tds[el]);if(tds[el][_0x6775[8]][_0x6775[44]](word)){tds[el][_0x6775[46]][_0x6775[45]]= _0x6775[47]}else {tds[el][_0x6775[46]][_0x6775[45]]= _0x6775[48]}}}
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
